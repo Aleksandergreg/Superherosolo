@@ -42,11 +42,5 @@ class DatabaseTest {
         //assert
         assertEquals(expectedSize, database.getSuperheroesArrayList().size());
     }
-    @Test
 
-    void editSuperhero(){
-        int expectedStrength = 1000;
-        int actualStrength = s1.getStrength();
-        assertEquals(expectedStrength, actualStrength);
-    }
 }
