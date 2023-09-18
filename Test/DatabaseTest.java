@@ -2,6 +2,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.xml.crypto.Data;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,14 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class DatabaseTest {
     Superhero s1;
     Superhero s2;
+    Superhero s3;
     Database database;
 
     @BeforeEach
     void setUp() {
         database = new Database();
-        s1 = new Superhero("Spiderman", "Aner det ikke","Edderkoppesværd", 1990, true, 1000);
-        s2 = new Superhero("Ironman", "Vides ikke","Jern", 1980, true, 300);
-        database.getSuperheroesArrayList().addAll(List.of(s1,s2));
+
 
     }
 
@@ -27,8 +28,13 @@ class DatabaseTest {
 
     @Test
     void getSearchMatches() {
+        s1 = new Superhero("Spiderman", "Aner det ikke","Edderkoppesværd", 1990, true, 1000);
+        database.getSuperheroesArrayList().add(s1);
+        //Arrange
         String expectedName = "Spiderman";
+        //Aact
         String actualName = s1.getSuperheroName();
+        //Assert
         assertEquals(expectedName, actualName);
     }
 
@@ -36,11 +42,26 @@ class DatabaseTest {
     //Tilføjer yderligere en superhelt udover de to hardcodede i databasen. Tester om expectedSize og størrelsen på min superheroesArraylist() er lige store.
     void addSuperhero() {
         //Arrange
-        int expectedSize = 3;
+        int expectedSize = 4;
+        s1 = new Superhero("Spiderman", "Aner det ikke","Edderkoppesværd", 1990, true, 1000);
+        s2 = new Superhero("Ironman", "Vides ikke","Jern", 1980, true, 300);
+        s3 = new Superhero("Superman", "Clark Kent", "Laser", 1983, true, 183);
         //Act
+        database.getSuperheroesArrayList().addAll(List.of(s1,s2,s3));
         database.addSuperhero("Holger", "Rune", "Tennisketsjer",2000, true, 7);
         //assert
         assertEquals(expectedSize, database.getSuperheroesArrayList().size());
-    }
 
-}
+    }
+    @Test
+    void addNewSuperhero(){
+        //Arrange
+        int expectedSize = 1;
+        s1 = new Superhero("Spiderman", "Aner det ikke","Edderkoppesværd", 1990, true, 1000);
+        //Act
+        database.getSuperheroesArrayList().add(s1);
+        //
+        assertEquals(expectedSize, database.getSuperheroesArrayList().size());
+
+    }
+    }
